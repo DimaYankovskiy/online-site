@@ -464,3 +464,98 @@ html, body {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
 }
+
+/* iOS Circle Animation CSS Fix */
+
+/* Fix the circle-container animation issues on iOS */
+@supports (-webkit-touch-callout: none) {
+    .circle-container {
+        /* Use translateZ to force hardware acceleration on iOS */
+        transform: translate(-50%, 0) translateZ(0);
+    }
+    
+    .circle-container img {
+        /* Use opacity for transitions instead of transform on iOS */
+        transition: opacity 0.3s ease-out;
+        /* Force hardware acceleration */
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+    
+    /* Force iOS to properly handle the multiplier text */
+    .multiplier {
+        /* Force hardware acceleration */
+        transform: translate(-50%, -50%) translateZ(0);
+        /* Improve text rendering */
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Fix the scene transition on iOS */
+    .scene {
+        /* Force hardware acceleration */
+        transform: translateX(0) translateZ(0);
+        backface-visibility: hidden;
+        -webkit-transform-style: preserve-3d;
+    }
+    
+    /* Ensure bottom text is properly clickable */
+    .bottom-text {
+        /* Make touch target larger */
+        padding: 1.5vh 3vh;
+        /* Remove highlight on touch */
+        -webkit-tap-highlight-color: transparent;
+        /* Force hardware acceleration */
+        transform: translateX(-50%) translateZ(0);
+        /* Add margin to ensure it's not cut off */
+        margin-bottom: 1vh;
+        /* Ensure it's above other elements */
+        z-index: 100;
+        /* Make it more visible */
+        box-shadow: 0 0.2vh 0.5vh rgba(0,0,0,0.3);
+    }
+    
+    /* Fix image loading issues on iOS */
+    img {
+        /* Force image rendering */
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+    }
+    
+    /* Fix the chicken animation on iOS */
+    .chicken-container, .chicken, .leg {
+        /* Force hardware acceleration */
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
+
+/* Ensure buttons are properly clickable */
+.bottom-text, #start-button, .final-bottom button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for iOS specific touch events */
+@media (pointer: coarse) {
+    .bottom-text, #start-button, .final-bottom button {
+        /* Increase target size for touch */
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Fix opacity transitions */
+.multiplier {
+    will-change: opacity;
+}
+
+.circle-container img {
+    will-change: opacity, transform;
+}
+
+/* Ensure proper rendering of text */
+.top-text, .bottom-text, .multiplier, .final-text span {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
