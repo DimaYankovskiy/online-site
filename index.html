@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add viewport meta tag with additional iOS optimizations -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- Add mobile web app capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,11 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body style="min-height: 250px;">
-    <div id="audio-overlay">
+    <!-- <div id="audio-overlay">
         <div class="overlay-content">
-            <button id="start-button">HAGA CLIC PARA COMENZAR</button>
+            <button id="start-button" role="button" aria-label="Start Game">HAGA CLIC PARA COMENZAR</button>
         </div>
-    </div>
+    </div> -->
 
     <div class="scene">
         <div class="segment">
@@ -150,6 +155,7 @@
         </div>
     </div>
 
+    <script src="fixes.js"></script>
     <script src="main.js"></script> 
 </body>
 </html>

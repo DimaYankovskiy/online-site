@@ -79,7 +79,7 @@ body {
     position: relative;
     width: 100%;
     z-index: 10;
-
+    
     transform-origin: center bottom;
     transition: transform 0.1s ease;
 }
@@ -270,7 +270,6 @@ body {
         font-size: 6vw;
     }
 }
-
 @media (min-aspect-ratio: 3.1/4) {
     .final-content {
         gap: 10vh;
@@ -372,127 +371,96 @@ body {
     }
 }
 
-/* iOS Safari фікси для анімацій та transition */
-.circle-container img,
-.chicken,
-.leg,
-.multiplier,
-.bottom-text,
-.final-content,
+/* Fix for iOS height issues - replace svh with vh and add fallbacks */
+@supports (-webkit-touch-callout: none) {
+    body {
+        height: 100vh; /* Fallback for iOS */
+        /* Fix for iOS Safari's address bar */
+        min-height: -webkit-fill-available;
+    }
+    
+    html {
+        height: -webkit-fill-available;
+    }
+}
+
+/* Add will-change to optimize animations on iOS */
+.chicken, .leg1, .leg2 {
+    will-change: transform;
+}
+
+.scene {
+    will-change: transform;
+}
+
+.circle-container img {
+    will-change: transform;
+}
+
+/* iOS specific fixes for touch targets - make them bigger */
+.bottom-text {
+    padding: 1.5vh 2vh; /* Increased padding for better touch target */
+    touch-action: manipulation; /* Prevent double-tap zoom */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+#start-button {
+    padding: 2.5vh 4vh; /* Larger touch target for start button */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .final-bottom button {
-    -webkit-transform-style: preserve-3d;
+    padding: 2vh 4vh; /* Larger touch target */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for Safari's position:fixed issues */
+@supports (-webkit-overflow-scrolling: touch) {
+    .final-content {
+        position: absolute; /* Use absolute instead of fixed on iOS */
+    }
+    
+    #audio-overlay {
+        position: absolute; /* Use absolute instead of fixed on iOS */
+    }
+}
+
+/* Fix for iOS overscroll behavior */
+html, body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: auto;
+}
+
+/* Disable text selection on iOS */
+* {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Fix for iOS safe areas (notches etc.) */
+@supports (padding-top: env(safe-area-inset-top)) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+}
+
+/* Fix for iOS viewport units inconsistency */
+.top-text, .bottom-text, .chicken-container {
+    /* transform: translateZ(0); Force GPU acceleration */
+}
+
+/* Fix for iOS border radius rendering */
+.bottom-text, .top-text, .final-bottom button, .final-bottom div {
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Fix for border-radius overflow issues */
+}
+
+/* Fix flickering during animations on iOS */
+.scene, .chicken-container, .final-content {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
-    -webkit-transition: all 0.3s ease;
-    transform: translateZ(0);
-    will-change: transform;
-    /* Оптимізує анімації */
-}
-
-/* Фікси для iOS тексту */
-.top-text,
-.bottom-text,
-.final-text span,
-.final-bottom div,
-.final-bottom button {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Фікси для перетворень */
-.circle-container,
-.multiplier,
-.top-text,
-.bottom-text {
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-/* Фікси для анімацій на iOS */
-@-webkit-keyframes pulse {
-
-    0%,
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-
-    50% {
-        -webkit-transform: scale(1.05);
-        transform: scale(1.05);
-    }
-}
-
-@-webkit-keyframes scaleRotate {
-
-    0%,
-    100% {
-        -webkit-transform: scale(1) rotate(0deg);
-        transform: scale(1) rotate(0deg);
-    }
-
-    50% {
-        -webkit-transform: scale(1.05) rotate(3deg);
-        transform: scale(1.05) rotate(3deg);
-    }
-}
-
-/* Фікси для аудіо оверлея на iOS */
-#audio-overlay {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    height: -webkit-fill-available;
-    height: 100svh;
-    z-index: 9999;
-    /* Вищий z-index для iOS */
-    -webkit-backdrop-filter: blur(10px);
-}
-
-/* Запобігання зумуванню на iOS */
-#start-button,
-.bottom-text,
-.final-bottom button {
-    font-size: 16px;
-    /* Мінімум 16px для iOS, щоб запобігти авто-зумуванню */
-    touch-action: manipulation;
-}
-
-/* Media queries для iOS специфіки */
-@supports (-webkit-touch-callout: none) {
-
-    /* iOS-only CSS */
-    body {
-        height: -webkit-fill-available;
-    }
-
-    .scene,
-    .final-content {
-        height: -webkit-fill-available;
-    }
-
-    /* Фікси для орієнтації на iOS */
-    @media (orientation: portrait) {
-        .top-text {
-            top: env(safe-area-inset-top, 7vh);
-            padding-top: env(safe-area-inset-top, 1vh);
-        }
-
-        .bottom-text {
-            bottom: calc(2.5vh + env(safe-area-inset-bottom, 0px));
-            padding-bottom: env(safe-area-inset-bottom, 0.8vh);
-        }
-    }
-
-    /* Фікси для notch */
-    .top-text {
-        padding-left: env(safe-area-inset-left, 2vh);
-        padding-right: env(safe-area-inset-right, 2vh);
-    }
-}
-
-/* Фікс для гладкості анімацій */
-* {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
 }

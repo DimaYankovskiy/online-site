@@ -323,3 +323,4 @@ function setupAudioOverlay() {
 window.addEventListener('load', function () {
     setupAudioOverlay();
 });
+
