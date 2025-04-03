@@ -1,0 +1,507 @@
+/* iOS Safari Fixes - Add to main.css */
+
+/* Fix for body and html overflow issues */
+html, body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-tap-highlight-color: transparent;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+/* Fix for position fixed elements */
+.final-content, #audio-overlay, .top-text, .bottom-text {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Add prefixes for transform properties */
+.circle-container {
+    -webkit-transform: translate(-50%, 0);
+    -webkit-perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+}
+
+.multiplier {
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.circle-container img {
+    -webkit-transform-origin: center center;
+    -webkit-transition: -webkit-transform 0.5s ease-out;
+}
+
+.chicken {
+    -webkit-transform-origin: center bottom;
+    -webkit-transition: -webkit-transform 0.1s ease;
+}
+
+.leg {
+    -webkit-transition: -webkit-transform 0.1s ease;
+}
+
+/* Transition prefixes */
+.multiplier {
+    -webkit-transition: opacity 0.2s ease;
+}
+
+.bottom-text {
+    -webkit-animation: pulse 2s ease-in-out infinite;
+    -webkit-transition: all 0.5s ease-in-out;
+}
+
+.final-content {
+    -webkit-transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    -webkit-transform: translate(-50%, -50%) scale(0.5) rotate(545deg);
+}
+
+.final-content.show {
+    -webkit-transform: translate(-50%, -50%) scale(1) rotate(0deg);
+}
+
+.final-bottom div {
+    -webkit-animation: scaleRotate 2s infinite ease-in-out;
+}
+
+.final-bottom button {
+    -webkit-animation: pulse 2s ease-in-out infinite;
+}
+
+/* Animation keyframes with prefixes */
+@-webkit-keyframes pulse {
+    0%, 100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+}
+
+@-webkit-keyframes scaleRotate {
+    0%, 100% {
+        -webkit-transform: scale(1) rotate(0deg);
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: scale(1.05) rotate(3deg);
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+
+/* Fix for backdrop-filter */
+#audio-overlay {
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Fix for click events on iOS */
+.bottom-text, #start-button, .final-bottom button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Prevent scrolling on the body when modals are open */
+body.no-scroll {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fix for scene transitions */
+.scene {
+    -webkit-transition: -webkit-transform 0.5s ease-out;
+    will-change: transform;
+}
+
+/* Hardware acceleration for animations */
+.chicken, .leg, .circle-container img, .final-content, .final-bottom div, .bottom-text {
+    will-change: transform;
+}
+
+/* Ensure proper heights for containers */
+.scene, .segment {
+    height: 100%;
+    -webkit-transform: translate3d(0,0,0);
+}
+
+html {
+    overflow: hidden;
+    position: relative;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #3b4668;
+    font-family: "Belanosima", sans-serif;
+}
+
+.scene {
+    display: flex;
+    height: 100%;
+}
+
+.scene img {
+    height: 100%;
+}
+
+.segment {
+    position: relative;
+}
+
+.circle-container {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 60%;
+    transform: translate(-50%);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.circle-container {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 60%;
+    transform: translate(-50%, 0);
+    perspective: 1000px;
+}
+
+.circle-container img {
+    width: 100%;
+    position: relative;
+    transform-origin: center center;
+    transition: transform 0.5s ease-out;
+}
+
+.multiplier {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    color: rgb(196, 208, 219);
+    -webkit-text-stroke: 0.1vh rgb(77, 95, 112);
+    text-shadow: rgb(85, 133, 177) 0px 0.5vh;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    font-size: 5vh;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chicken-container {
+    position: absolute;
+    bottom: 14.6%;
+    left: 10vh;
+    width: 19vh;
+}
+
+.chicken {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    
+    transform-origin: center bottom;
+    transition: transform 0.1s ease;
+}
+
+.leg {
+    position: absolute;
+    width: 40%;
+    z-index: 5;
+    transition: transform 0.1s ease;
+}
+
+.leg1 {
+    bottom: -10%;
+    left: 20%;
+}
+
+.leg2 {
+    bottom: -10%;
+    right: 20%;
+}
+
+.top-text {
+    position: absolute;
+    top: 7vh;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 7vh;
+    white-space: nowrap;
+    color: #E7EE18;
+    font-weight: bold;
+    background: #FBEF8033;
+    border: 0.5vh solid #E7EE18;
+    padding: 1vh 2vh;
+    border-radius: 1vh;
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 2.5vh;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 4.5vh;
+    white-space: nowrap;
+    color: white;
+    background: linear-gradient(90deg, #F7B438 0%, #F8E42E 100%);
+    padding: 0.8vh 1.5vh;
+    border-radius: 1vh;
+    translate: -50%;
+    animation: pulse 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.bottom-text:hover {
+    background: linear-gradient(90deg, #F7B438 0%, #F7B438 100%);
+}
+
+/*  */
+.final-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5) rotate(545deg);
+    opacity: 0;
+    text-align: center;
+    font-family: 'Belanosima', sans-serif;
+    color: #333;
+    transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 26vh;
+    gap: 18vh;
+    align-items: center;
+    color: white;
+    z-index: 20;
+}
+
+.final-content.show {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+.final-content img {
+    width: 80vw;
+}
+
+.final-text {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+.final-text span {
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.final-text span:nth-of-type(1) {
+    font-size: 15vw;
+}
+
+.final-text span:nth-of-type(2) {
+    font-size: 7vw;
+}
+
+.final-text span:nth-of-type(3) {
+    font-size: 10vw;
+}
+
+.final-text span:nth-of-type(4) {
+    font-size: 10vw;
+}
+
+.final-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vw;
+}
+
+.final-bottom div {
+    font-size: 8vw;
+    border: 0.5vw solid #E7EE18;
+    background: #E7EE184D;
+    padding: 1.5vw 3vw;
+    width: fit-content;
+    white-space: nowrap;
+    border-radius: 1vw;
+    animation: scaleRotate 2s infinite ease-in-out;
+    animation-delay: 1s;
+}
+
+.final-bottom button {
+    color: white;
+    font-size: 6vw;
+    padding: 1.5vw 3vw;
+    width: fit-content;
+    white-space: nowrap;
+    border: none;
+    outline: none;
+    background: linear-gradient(90deg, #F7B438 0%, #F8E42E 100%);
+    border-radius: 1.2vw;
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.final-bottom button:hover {
+    background: linear-gradient(90deg, #F7B438 0%, #F7B438 100%);
+    scale: 1.2;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes scaleRotate {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+
+@media (max-aspect-ratio: 7/10) {
+    .top-text {
+        /* top: 7vw; */
+        font-size: 10vw;
+        border: 0.5vw solid #E7EE18;
+        padding: 1vw 2vw;
+        border-radius: 1vw;
+    }
+
+    .bottom-text {
+        font-size: 6vw;
+    }
+}
+@media (min-aspect-ratio: 3.1/4) {
+    .final-content {
+        gap: 10vh;
+    }
+
+    .final-content img {
+        width: 70vh;
+    }
+
+    .final-text span:nth-of-type(1) {
+        font-size: 10vh;
+    }
+
+    .final-text span:nth-of-type(2) {
+        font-size: 5vh;
+    }
+
+    .final-text span:nth-of-type(3) {
+        font-size: 6vh;
+    }
+
+    .final-text span:nth-of-type(4) {
+        font-size: 6vh;
+    }
+
+    .final-bottom {
+        gap: 5vh;
+    }
+
+    .final-bottom div {
+        font-size: 5vh;
+        border: 0.5vh solid #E7EE18;
+        padding: 1.5vh 3vh;
+        border-radius: 1vh;
+    }
+
+    .final-bottom button {
+        font-size: 4vh;
+        padding: 1.5vh 3vh;
+        border-radius: 1.2vh;
+    }
+}
+
+#audio-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+    text-align: center;
+}
+
+.overlay-content img {
+    width: 70vw;
+    max-width: 300px;
+}
+
+#start-button {
+    background: linear-gradient(90deg, #F7B438 0%, #F8E42E 100%);
+    color: white;
+    border: none;
+    border-radius: 1.2vw;
+    padding: 2vw 4vw;
+    font-size: 5vw;
+    font-weight: bold;
+    font-family: "Belanosima", sans-serif;
+    cursor: pointer;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(253, 255, 140, 0.5);
+}
+
+#start-button:hover {
+    background: linear-gradient(90deg, #F7B438 0%, #F7B438 100%);
+}
+
+@media (orientation: landscape) {
+    .overlay-content img {
+        width: 40vh;
+        max-width: 300px;
+    }
+
+    #start-button {
+        padding: 2vh 4vh;
+        font-size: 4vh;
+        border-radius: 1.2vh;
+    }
+}

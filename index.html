@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <!-- Prevent telephone number detection -->
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Add apple-mobile-web-app capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <style>
+        :root {
+            --vh: 1vh;
+        }
+
+        /* Use this custom property for height calculations instead of vh units */
+        .scene,
+        body,
+        html {
+            height: 100vh;
+            /* Fallback */
+            height: calc(var(--vh, 1vh) * 100);
+        }
+
+        /* iOS-specific CSS */
+        .ios-device .scene {
+            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* Ensure content is visible on notched iPhones */
+        @supports(padding: max(0px)) {
+            body {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    </style>
+</head>
+
+<body style="min-height: 250px;">
+    <div id="audio-overlay">
+        <div class="overlay-content">
+            <button id="start-button">HAGA CLIC PARA COMENZAR</button>
+        </div>
+    </div>
+
+    <div class="scene">
+        <div class="segment">
+            <img src="resources/images/enter.png" alt="">
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier"></div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">+200 FS!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier"></div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">+400 FS!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">
+                    +50<br>
+                    000<br>
+                    💸
+                </div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier"></div>
+            </div>
+        </div>
+        <div class="segment">
+            <img src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">
+                    +100<br>
+                    000<br>
+                    💸
+                </div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+        <div class="segment">
+            <img class="wall-base" src="resources/images/wall-cropped.png" alt="">
+            <div class="circle-container">
+                <img class="circle-base" src="resources/images/circle-blue.png" alt="">
+                <div class="multiplier">!</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chicken-container">
+        <img class="chicken" src="resources/images/chicken.png" alt="">
+        <img class="leg leg1" src="resources/images/leg1.png" alt="">
+        <img class="leg leg2" src="resources/images/leg2.png" alt="">
+    </div>
+
+    <div class="top-text">¡Obtén tu bono!</div>
+    <div class="bottom-text">¡JUGAR!</div>
+    <!-- <div class="bottom-text">¡PERO LOS HUEVOS SON DE ORO!</div> -->
+
+
+    <div style="display: none;">
+        <img src="resources/images/circle-green.png" alt="">
+    </div>
+
+    <div class="final-content" style="display: none;">
+        <div class="final-text">
+            <span>BONO</span>
+            <span>A LOS NUEVOS JUGADORES</span>
+            <span>150 000💸</span>
+            <span>+600 FS!</span>
+        </div>
+
+        <div class="final-bottom">
+            <div>+45 FS en la aplicación!</div>
+            <button>¡OBTENER!</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
