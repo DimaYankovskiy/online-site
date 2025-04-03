@@ -299,11 +299,7 @@ function setupAudioOverlay() {
         startButton.addEventListener('click', function () {
             overlay.style.transition = 'opacity 0.5s ease';
             overlay.style.opacity = '0';
-            
-            // Fix audio for Safari
-            fixAudioForSafari();
-            
-            // Then play
+                
             playSound('backgroundMusic');
 
             setTimeout(() => {
@@ -311,98 +307,19 @@ function setupAudioOverlay() {
             }, 500);
         });
 
-        // Rest of the function remains the same
+        overlay.addEventListener('click', function () {
+            overlay.style.transition = 'opacity 0.5s ease';
+            overlay.style.opacity = '0';
+                
+            playSound('backgroundMusic');
+
+            setTimeout(() => {
+                overlay.remove();
+            }, 500);
+        });
     }
 }
 
 window.addEventListener('load', function () {
     setupAudioOverlay();
-    applyIOSFixes();
 });
-
-// Add these functions to main.js
-
-// Function to detect iOS
-function isIOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-
-// Apply iOS specific fixes
-function applyIOSFixes() {
-    if (!isIOS()) return;
-    
-    // Prevent scroll/bounce for the entire page
-    document.body.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    }, { passive: false });
-    
-    // Fix for audio playback issues in iOS
-    document.addEventListener('touchstart', function() {
-        // Create silent audio context to unlock audio
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        // Load all audio elements at once
-        Object.values(audioElements).forEach(audio => {
-            audio.load();
-        });
-        
-        // Remove this listener after first touch
-        document.removeEventListener('touchstart', arguments.callee);
-    }, false);
-    
-    // Fix for button clicks in iOS
-    const allButtons = document.querySelectorAll('button, .bottom-text');
-    allButtons.forEach(button => {
-        button.addEventListener('touchstart', function(e) {
-            // Prevent default behavior to avoid double-tap zooming
-            e.preventDefault();
-        }, false);
-    });
-    
-    // Add class to indicate iOS
-    document.documentElement.classList.add('ios-device');
-    
-    // Fix height issue with Safari's dynamic toolbar
-    function fixHeight() {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    
-    // Run on first load
-    fixHeight();
-    
-    // Update on resize
-    window.addEventListener('resize', fixHeight);
-    window.addEventListener('orientationchange', fixHeight);
-}
-
-// Fix for audio playback in Safari
-function fixAudioForSafari() {
-    // Create empty buffer for iOS
-    const silentAudio = new Audio();
-    silentAudio.autoplay = true;
-    
-    // Feature check for WebAudio API
-    if (window.AudioContext || window.webkitAudioContext) {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        // Creating short silent buffer
-        const buffer = audioContext.createBuffer(1, 1, 22050);
-        const source = audioContext.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-        
-        if (source.start) {
-            source.start(0);
-        } else {
-            source.noteOn(0);
-        }
-    }
-    
-    // Make sure audio is loaded properly
-    Object.keys(audioElements).forEach(key => {
-        audioElements[key].load();
-    });
-}
-
-// Modify the setupAudioOverlay function to add Safari audio fix

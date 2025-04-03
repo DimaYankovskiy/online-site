@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,49 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
-    <!-- Prevent telephone number detection -->
-    <meta name="format-detection" content="telephone=no">
-
-    <!-- Add apple-mobile-web-app capability -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <style>
-        :root {
-            --vh: 1vh;
-        }
-
-        /* Use this custom property for height calculations instead of vh units */
-        .scene,
-        body,
-        html {
-            height: 100vh;
-            /* Fallback */
-            height: calc(var(--vh, 1vh) * 100);
-        }
-
-        /* iOS-specific CSS */
-        .ios-device .scene {
-            -webkit-transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-        }
-
-        /* Ensure content is visible on notched iPhones */
-        @supports(padding: max(0px)) {
-            body {
-                padding-left: env(safe-area-inset-left);
-                padding-right: env(safe-area-inset-right);
-                padding-top: env(safe-area-inset-top);
-                padding-bottom: env(safe-area-inset-bottom);
-            }
-        }
-    </style>
 </head>
-
 <body style="min-height: 250px;">
     <div id="audio-overlay">
         <div class="overlay-content">
@@ -170,7 +127,7 @@
         <img class="leg leg2" src="resources/images/leg2.png" alt="">
     </div>
 
-    <div class="top-text">¡Obtén tu bono!1</div>
+    <div class="top-text">¡Obtén tu bono!</div>
     <div class="bottom-text">¡JUGAR!</div>
     <!-- <div class="bottom-text">¡PERO LOS HUEVOS SON DE ORO!</div> -->
 
@@ -193,7 +150,6 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="main.js"></script> 
 </body>
-
 </html>
