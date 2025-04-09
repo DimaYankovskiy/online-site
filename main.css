@@ -20,6 +20,8 @@ body {
 
 .scene img {
     height: 100%;
+    
+    width: 100vw;
 }
 
 .segment {
