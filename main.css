@@ -20,8 +20,6 @@ body {
 
 .scene img {
     height: 100%;
-    
-    width: 100vw;
 }
 
 .segment {
@@ -110,19 +108,19 @@ body {
 .bottom-text {
     position: absolute;
     bottom: 2.5vh;
-    left: 5%;
+    left: 50%;
     box-sizing: border-box;
     text-align: center;
     
-    width: 90%;
+    width: fit-content;
     /* transform: translate(-50%); */
     font-size: 4.5vh;
     white-space: nowrap;
     color: white;
     background: linear-gradient(90deg, #F7B438 0%, #F8E42E 100%);
-    padding: 0.8vh 0vh;
+    padding: 0.8vh 1vh;
     border-radius: 1vh;
-    /* translate: -50%; */
+    translate: -50%;
     animation: pulse 2s ease-in-out infinite;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
@@ -264,7 +262,19 @@ body {
     .bottom-text {
         font-size: 6vw;
     }
+
+    .scene .wall-base {
+        width: 100vw;
+    }
+
+    .bottom-text {
+        left: 5%;
+        
+        width: 90%;
+        translate: 0%;
+    }
 }
+
 @media (min-aspect-ratio: 3.1/4) {
     .final-content {
         gap: 10vh;
